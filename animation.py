@@ -2,7 +2,8 @@ import matplotlib.pyplot as plt
 import numpy as np
 from sklearn.linear_model import LinearRegression
 import random
-
+import math
+#rounded_number =  round(a_number, significant_digits - int(math.floor(math.log10(abs(a_number)))) - 1)
 
 x_vals = []
 y_vals = []
@@ -40,9 +41,11 @@ for i in range(1, 10000):
         y = np.array(y_vals)
         y = y.reshape(-1, 1)
         reg.fit(x, y)
-        plt.xlim(0, 20000)
-        plt.ylim(0, 20000)
-        plt.scatter(x_vals, y_vals, color = 'red')
+        plt.xlim(0, 15000)
+        plt.ylabel('Y axis')
+        plt.xlabel('X axis')
+        plt.ylim(0, 15000)
+        plt.scatter(x_vals, y_vals, color = 'red', s=1)
         plt.plot(list(range(15000)), reg.predict(np.array([x for x in range(15000)]).reshape(-1,1)), color = 'red')
         plt.pause(0.0001)
 
@@ -56,20 +59,24 @@ for i in range(1, 10000):
             y_vals.append((random.randint((i+2000), (i+7000))*gradient)+intercept)
 
 
-        plt.xlim(0, 20000)
-        plt.ylim(0, 20000)
-        plt.scatter(x_vals, y_vals, color = 'red')
+        plt.xlim(0, 15000)
+        plt.ylabel('Y axis')
+        plt.xlabel('X axis')
+        plt.ylim(0, 15000)
+        plt.scatter(x_vals, y_vals, color = 'red', s=1)
         plt.pause(0.0001)        
     
 
-plt.show()
+
 
 
 if gradient > 10:
     print("SEE I TOLD YOU IT WOULDN'T WORK")
 
+print(f"The equation of the line of best fit is y = {round(reg.coef_[0][0], 3 - int(math.floor(math.log10(abs(reg.coef_[0][0])))) - 1)}x + {round(reg.intercept_[0], 5 - int(math.floor(math.log10(abs(reg.intercept_[0])))) - 1)}")
 
 
+plt.show()
 
 
 
